@@ -25,7 +25,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("cotacao/", cotacao, name="cotacao"),
     path("ativos/", AtivoListView.as_view(), name= "meus ativos"),
-    path("cadastro/ativo",AtivoCreateView.as_view()),
+    path("cadastro/ativo",AtivoCreateView.as_view(), name= "cadastrar ativo"),
     path("login/", LoginView.as_view(), name='login'),
     path("logout/", auth_views.LogoutView.as_view(), name='logout'),
     path('cadastro/usuario', RegistroView.as_view(), name='registro'),

@@ -12,7 +12,7 @@
     />
   </head>
   <body class= "bg-dark">
-    <nav class="navbar d-flex mb-3 navbar-expand-lg mb-4 bg-info"  data-bs-theme="dark">
+    <nav class="navbar d-flex mb-3 navbar-expand-lg mb-4 bg-info "  data-bs-theme="dark">
       <div class="container-fluid">
         <button
           class="navbar-toggler"
@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Pagina Inicial</a>
+              <a class="nav-link" aria-current="page" href="{% url 'meus ativos'%}">Pagina Inicial</a>
             </li>
             <li class="nav-item">
               <a class="nav-link"  href="#" aria-disabled="true">Sair</a>
@@ -67,7 +67,7 @@
                         
                     </tr>{% endfor %}
                     <td colspan="6">
-                      <a href="">Adicionar Ativo</a>
+                      <a href="{% url 'cadastrar ativo'%}">Adicionar Ativo</a>
                     </td>
                 </tbody>
             </table>
@@ -83,7 +83,7 @@
                 </thead>
                 <tbody>
                     <td colspan="6">
-                        <a href="">Adicionar Ativo</a>
+                        <a href="{% url 'cadastrar ativo'%}">Adicionar Ativo</a>
                     </td>
             </table>
         {% endif %}
