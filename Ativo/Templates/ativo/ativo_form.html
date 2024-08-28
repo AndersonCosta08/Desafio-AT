@@ -32,10 +32,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href = "{% url 'meus ativos'%}" >Pagina Inicial</a>
+              <a class="nav-link text-white" aria-current="page" href = "{% url 'meus ativos'%}" >Pagina Inicial</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"  href="#" aria-disabled="true">Sair</a>
+              <a class="nav-link text-white"  href="#" aria-disabled="true">Sair</a>
             </li>
           </ul>
         </div>
@@ -61,8 +61,9 @@
                 <td> {{form.valor_de_compra}} </td>
                 <td> {{form.valor_de_venda}} </td>
                 <td>
-                  <input type="submit" name="submit" class="btn btn-primary btn-sm" value="salvar">
-                    
+                  <div class="form-group">
+                    <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                </div>
                 </td>
             </tbody>
         </table>
