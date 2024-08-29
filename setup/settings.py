@@ -155,7 +155,7 @@ EMAIL_HOST_PASSWORD = config("Senha")
 
 CELERY_BEAT_SCHEDULE = {
     "capturar_cotacoes_cada_minuto": {
-        "task": "Ativo.task.cotacoes",
+        "task": "Ativo.tasks.cotacoes",
         "schedule": crontab(minute="*/1"),  # A cada minuto
     },
 }

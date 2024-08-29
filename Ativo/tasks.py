@@ -8,10 +8,13 @@ from decouple import config
 from setup.celery_app import app
 
 
-@app.task()
-def cotacoes():
+@shared_task(bind=True)
+def cotacoes(self):
+
+    self.app.log.info('tarefa iniciada')
     ativos = Ativo.objects.all()
     for ativo in ativos:
+        self.app.log.info('entrou no for')
         # Verificar a última cotação salva para determinar se já passou o intervalo de tempo
         ultima_cotacao = (
             Historico.objects.filter(ativo=ativo).order_by("-data_hora").first()
@@ -24,7 +27,8 @@ def cotacoes():
             preco = cotacao(ativo.codigo)
             if preco is not None:
                 # Salva a nova cotação no banco de dados
-                Historico.objects.create(ativo=ativo, preco=preco)
+                historico = Historico.objects.create(ativo=ativo, preco=preco)
+                self.app.log.info(historico)
                 if preco >= ativo.valor_de_venda:
                     send_mail(
                         f"Aviso para venda do ativo: {ativo.codigo}",
@@ -41,3 +45,4 @@ def cotacoes():
                         [ativo.usuario.email],
                         fail_silently=False,
                     )
+    pass
