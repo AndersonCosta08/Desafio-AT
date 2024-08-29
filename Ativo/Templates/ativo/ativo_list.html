@@ -45,8 +45,9 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Código</th>
-                    <th scope="col">Ultima cotação</th>
-                    <th scope="col">Data/hora</th>
+                    <th scope="col" colspan=>Ultima cotação</th>
+                    <th scope="col" colspan="3">Data/hora</th>
+                    <th scope="col" colspan= "3"></th>                 
                 </tr>
                 </thead>
                 <tbody>
@@ -54,7 +55,7 @@
                         <th scope="row">1</th>
                         <td> {{ativo.codigo}} </td>
                         <td> - </td>
-                        <td> - </td>
+                        <td colspan = "3"> - </td>
                         <td>
                             <a href="btn btn-primary btn-sm">Ver mais</a>
                         </td>
@@ -66,7 +67,7 @@
                       </td>
                         
                     </tr>{% endfor %}
-                    <td colspan="6">
+                    <td colspan="9">
                       <a href="{% url 'cadastrar ativo'%}">Adicionar Ativo</a>
                     </td>
                 </tbody>

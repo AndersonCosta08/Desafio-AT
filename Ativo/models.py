@@ -10,7 +10,7 @@ class Ativo(models.Model):
     )
     codigo = models.CharField(max_length=10, null=False, blank=False)
     nome = models.CharField(max_length=10, null=False, blank=False)
-    periodicidade = models.DurationField(blank=False, null=False)
+    periodicidade = models.IntegerField(blank=False)
     valor_de_compra = models.FloatField(null=False)
     valor_de_venda = models.FloatField(null=False)
 
@@ -23,11 +23,7 @@ class Historico(models.Model):
     preco = models.FloatField(null=False)
     data_hora = models.DateTimeField(null=False, auto_now_add=True)
 
-    def __str__(self):
-        return self.all()
-
     def criar_historico(self, ativo, preco):
         historico = self.model(ativo=ativo, preco=preco)
         historico.save(using=self._db)
         return historico
-
