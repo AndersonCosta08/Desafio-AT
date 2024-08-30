@@ -1,12 +1,13 @@
-{% load crispy_forms_tags %}
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 
 
 {% block titulo %}
   {% if ativo.pf %}
-    Edição de ativo
+    <title>Edição de ativo</title>
   {% else %}
-    Cadastro de ativo
+    <title>Cadastro de ativo</title>
   {% endif %}
 {% endblock titulo %}
 

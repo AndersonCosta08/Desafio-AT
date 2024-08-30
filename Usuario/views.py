@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout
 from .models import Usuario
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
@@ -44,3 +44,11 @@ class LoginView(View):
                     reverse_lazy("meus ativos")
                 )  # redireciona para meus ativos apos logar
         return render(request, self.template_name, {"form": form})
+
+class CustomLogoutView(View):
+    
+    def get(self, request):
+        # Lógica de logout
+        logout(request)
+        # Redireciona para a página 'home' após o logout
+        return redirect(reverse_lazy('login'))

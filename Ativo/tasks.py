@@ -1,7 +1,7 @@
 from celery import shared_task
 from Ativo.models import Ativo, Historico
 from django.utils import timezone
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, time
 from django.core.mail import send_mail
 from decouple import config
 import requests
@@ -16,9 +16,9 @@ def cotacoes(self):
             Historico.objects.filter(ativo=ativo).order_by("-data_hora").first()
         )
         if (
-            ultima_cotacao is None
+            (ultima_cotacao is None
             or ultima_cotacao.data_hora
-            <= timezone.now() - timedelta(minutes=ativo.periodicidade)
+            <= timezone.now() - timedelta(minutes=ativo.periodicidade)) and (time(10, 00, 00) < timezone.now().time() < time(17, 00, 00))
         ):
             # busca as informações do ativo
             preco = cotacao(ativo.codigo)
