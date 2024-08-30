@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 
 from .models import Usuario
 
-
+#classe para estabelecer o form de login com email
 class LoginForm(forms.Form):
     email = forms.EmailField(label="Email", max_length=254)
     senha = forms.CharField(label="Senha", widget=forms.PasswordInput)
@@ -20,7 +20,7 @@ class LoginForm(forms.Form):
                 )
         return super().clean()
 
-
+#classe para estabelecer o form de login com email
 class RegistroForm(forms.ModelForm):
     senha = forms.CharField(label="Senha", widget=forms.PasswordInput)
     confirmar_senha = forms.CharField(

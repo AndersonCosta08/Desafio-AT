@@ -25,11 +25,13 @@ class RegistroView(CreateView):
 class LoginView(View):
     form_class = LoginForm
     template_name = "Usuario/login.html"
-
+    
+    #função para passar o formulario alterado
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {"form": form})
-
+    
+    #função para validar o login
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():

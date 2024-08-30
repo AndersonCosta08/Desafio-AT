@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+    {% block titlo %}
+        {{ativo.codigo}}
+    {% endblock titlo %}
+
+{% block conteudo %}
+        <h1 class="text-light bg-dark mb-4">Histórico de cotações de {{ ativo.codigo }}</h1>
+        <div class="container my-4"> 
+            <table  class="table table-dark table-striped mx-auto" >
+                <thead>
+                    <tr>
+                        <th class="px-4 py-3" scope="col">#</th>
+                        <th class="px-4 py-3" scope="col">Preço</th>
+                        <th class="px-4 py-3" scope="col">Data/Hora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for historico in historico_list %}
+                    <tr>
+                        <td class="px-4 py-3">{{ ativo.codigo}}</td>
+                        <td class="px-4 py-3">{{ historico.preco }}</td>
+                        <td class="px-4 py-3">{{ historico.data_hora }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">Esse Ativo não possui nenhum registro.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'meus ativos'%}">Retornar</a>
+        </div>
+        {% if is_paginated %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a class= "btn btn-info btn-sm px-4 py-2 " href="?page={{ page_obj.previous_page_number }}">pagina anterior</a>
+                    {% endif %}
+                    <span class="current text-info px-4">
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a class= "btn btn-info btn-sm px-4 py-2 " href="?page={{ page_obj.next_page_number }}">próxima pagina</a>
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+{% endblock conteudo %}
+

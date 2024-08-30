@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "Ativo.apps.AtivoConfig",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_celery_beat",
 ]
 
 
@@ -116,13 +117,16 @@ TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
+
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -132,10 +136,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "Usuario.Usuario"
 
 # configurações do celery
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
-# Timezone
-CELERY_TIMEZONE = "America/Sao_Paulo"
+CELERY_BROKER_URL = "pyamqp://guest@localhost//"
+
+
 # Outras configurações
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
