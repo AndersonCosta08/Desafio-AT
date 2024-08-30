@@ -11,7 +11,7 @@
 
     <p class="text-white">Todas as informações armazenadas sobre esse ativo serão deletadas</p>
 
-    <form action="POST">
+    <form method="POST">
         {% csrf_token %}
         <button class= "btn btn-danger btn-sm py-2 px-4 mx-1" type"submit">excluir</button> {% comment "" %} botão de confirmação de exclusão {% endcomment %}
         <a  href="{% url 'meus ativos' %}" class= "btn btn-secondary btn-sm py-2 px-4 mx-1">calcelar</a> {% comment "" %} botão para cancelar exclusão {% endcomment %}

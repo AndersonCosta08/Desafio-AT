@@ -45,7 +45,7 @@ class LoginView(View):
                 )  # redireciona para meus ativos apos logar
         return render(request, self.template_name, {"form": form})
 
-
+#view para logout
 class CustomLogoutView(View):
 
     def get(self, request):

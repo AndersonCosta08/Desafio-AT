@@ -17,6 +17,10 @@ class AtivoListView(LoginRequiredMixin, ListView):
         print(preco)
         return preco.preco
 
+    def get_queryset(self):
+        # Retorna somente os ativos do usuário logado
+        return Ativo.objects.filter(usuario=self.request.user)
+
 
 # classe para adicionar um ativo ao monitoramento
 class AtivoCreateView(LoginRequiredMixin, CreateView):
@@ -42,7 +46,7 @@ class AtivoUpdateView(LoginRequiredMixin, UpdateView):
 # classe para deletar um ativo
 class AtivoDeleteView(LoginRequiredMixin, DeleteView):
     model = Ativo
-
+    success_url = reverse_lazy('meus ativos')  
 
 # classe para mostrar o historico de cotações de cada ativo
 class HistoricoListView(LoginRequiredMixin, ListView):

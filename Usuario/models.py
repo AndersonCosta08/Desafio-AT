@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-
+#classe intermediária
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nome, senha=None):
         if not email:
@@ -18,7 +18,7 @@ class UsuarioManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
+#classe usuario final
 class Usuario(AbstractBaseUser):
     nome = models.CharField(max_length=250, null=False, blank=False)
     email = models.EmailField(null=False, blank=False, unique=True)
