@@ -25,13 +25,13 @@ class RegistroView(CreateView):
 class LoginView(View):
     form_class = LoginForm
     template_name = "Usuario/login.html"
-    
-    #função para passar o formulario alterado
+
+    # função para passar o formulario alterado
     def get(self, request):
         form = self.form_class()
         return render(request, self.template_name, {"form": form})
-    
-    #função para validar o login
+
+    # função para validar o login
     def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -45,10 +45,11 @@ class LoginView(View):
                 )  # redireciona para meus ativos apos logar
         return render(request, self.template_name, {"form": form})
 
+
 class CustomLogoutView(View):
-    
+
     def get(self, request):
         # Lógica de logout
         logout(request)
         # Redireciona para a página 'home' após o logout
-        return redirect(reverse_lazy('login'))
+        return redirect(reverse_lazy("login"))

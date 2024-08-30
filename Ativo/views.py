@@ -7,7 +7,8 @@ from django.urls import reverse_lazy
 from datetime import datetime, timedelta
 from django.core.mail import send_mail
 
-#classe para exibir a lista de ativos
+
+# classe para exibir a lista de ativos
 class AtivoListView(LoginRequiredMixin, ListView):
     model = Ativo
 
@@ -16,7 +17,8 @@ class AtivoListView(LoginRequiredMixin, ListView):
         print(preco)
         return preco.preco
 
-#classe para adicionar um ativo ao monitoramento
+
+# classe para adicionar um ativo ao monitoramento
 class AtivoCreateView(LoginRequiredMixin, CreateView):
     model = Ativo
     fields = ["codigo", "periodicidade", "valor_de_compra", "valor_de_venda"]
@@ -29,31 +31,34 @@ class AtivoCreateView(LoginRequiredMixin, CreateView):
         form.instance.usuario = self.request.user
         return super().form_valid(form)
 
-#classe para editar as informações de um ativo
+
+# classe para editar as informações de um ativo
 class AtivoUpdateView(LoginRequiredMixin, UpdateView):
     model = Ativo
     fields = ["periodicidade", "valor_de_compra", "valor_de_venda"]
     success_url = reverse_lazy("meus ativos")
 
-#classe para deletar um ativo
-class AtivoDeleteView( LoginRequiredMixin, DeleteView):
+
+# classe para deletar um ativo
+class AtivoDeleteView(LoginRequiredMixin, DeleteView):
     model = Ativo
 
-#classe para mostrar o historico de cotações de cada ativo
+
+# classe para mostrar o historico de cotações de cada ativo
 class HistoricoListView(LoginRequiredMixin, ListView):
     model = Historico
     template_name = "historico_list.html"
     context_object_name = "historico_list"
     paginate_by = 10
 
-    #função responsavel por buscar o ativo correspondente a aquele historico
+    # função responsavel por buscar o ativo correspondente a aquele historico
     def get_queryset(self):
         # Busca o ativo pelo id que será passado na URL
         ativo = get_object_or_404(Ativo, id=self.kwargs["ativo_id"])
         # Filtra os históricos relacionados ao ativo
         return Historico.objects.filter(ativo=ativo).order_by("-data_hora")
-    
-    #função para passar o ativo por context
+
+    # função para passar o ativo por context
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Passa o ativo para o context, para poder exibir o código do ativo na página

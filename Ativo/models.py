@@ -3,7 +3,8 @@ from Usuario.models import Usuario
 
 # Create your models here.
 
-#classe Ativo
+
+# classe Ativo
 class Ativo(models.Model):
     usuario = models.ForeignKey(
         Usuario, on_delete=models.CASCADE, related_name="ativos"
@@ -13,7 +14,8 @@ class Ativo(models.Model):
     valor_de_compra = models.FloatField(null=False)
     valor_de_venda = models.FloatField(null=False)
 
-#classe Historico
+
+# classe Historico
 class Historico(models.Model):
     ativo = models.ForeignKey(Ativo, on_delete=models.CASCADE, related_name="historico")
     preco = models.FloatField(null=False)

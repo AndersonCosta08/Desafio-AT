@@ -3,7 +3,13 @@ from django.contrib import admin
 from django.urls import path
 from Usuario.views import LoginView, RegistroView, CustomLogoutView
 
-from Ativo.views import AtivoListView, AtivoCreateView, HistoricoListView, AtivoUpdateView, AtivoDeleteView
+from Ativo.views import (
+    AtivoListView,
+    AtivoCreateView,
+    HistoricoListView,
+    AtivoUpdateView,
+    AtivoDeleteView,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -14,5 +20,5 @@ urlpatterns = [
     path("ativos/<int:ativo_id>/", HistoricoListView.as_view(), name="historico"),
     path("editar/<int:pk>/", AtivoUpdateView.as_view(), name="editar"),
     path("excluir/<int:pk>/", AtivoDeleteView.as_view(), name="excluir"),
-    path('logout/', CustomLogoutView.as_view(), name='logout'),
+    path("logout/", CustomLogoutView.as_view(), name="logout"),
 ]

@@ -16,10 +16,10 @@ def cotacoes(self):
             Historico.objects.filter(ativo=ativo).order_by("-data_hora").first()
         )
         if (
-            (ultima_cotacao is None
+            ultima_cotacao is None
             or ultima_cotacao.data_hora
-            <= timezone.now() - timedelta(minutes=ativo.periodicidade)) and (time(10, 00, 00) < timezone.now().time() < time(17, 00, 00))
-        ):
+            <= timezone.now() - timedelta(minutes=ativo.periodicidade)
+        ) and (time(10, 00, 00) < timezone.now().time() < time(17, 00, 00)):
             # busca as informações do ativo
             preco = cotacao(ativo.codigo)
             if preco is not None:
@@ -28,9 +28,9 @@ def cotacoes(self):
                     ativo=ativo, preco=preco, data_hora=timezone.now()
                 )
                 print(timezone.now())
-                #verifica o pipe de venda
+                # verifica o pipe de venda
                 if preco >= ativo.valor_de_venda:
-                    #envia o email caso o preco aeja igual ou maior ao valor estipulado
+                    # envia o email caso o preco aeja igual ou maior ao valor estipulado
                     send_mail(
                         f"Aviso para venda do ativo: {ativo.codigo}",
                         f"O ativo {ativo.codigo} está acima do valor definido para venda {ativo.valor_de_venda} , apresentando o valor {preco}",
@@ -38,9 +38,9 @@ def cotacoes(self):
                         [ativo.usuario.email],
                         fail_silently=False,
                     )
-                #verifica o pipe de compra
+                # verifica o pipe de compra
                 elif preco <= ativo.valor_de_compra:
-                    #envia o email caso o preco aeja igual ou menor ao valor estipulado
+                    # envia o email caso o preco aeja igual ou menor ao valor estipulado
                     send_mail(
                         f"Aviso para venda do ativo: {ativo.codigo}",
                         f"O ativo {ativo.codigo} está abaixo do valor definido para compra {ativo.valor_de_compra} , apresentando o valor {preco}",
@@ -50,7 +50,8 @@ def cotacoes(self):
                     )
     return "tarefa concluida"
 
-#função para requisição de cotações
+
+# função para requisição de cotações
 def cotacao(codigo):
 
     # url de conexção da api
@@ -74,7 +75,7 @@ def cotacao(codigo):
     # tratamento de dados para armazenamento
     data = response.json()
 
-    #extrai o valor do preço do ativo no json de responde
+    # extrai o valor do preço do ativo no json de responde
     data_tratado = data["data"][0]["quote"]["regularMarketPrice"]
 
     print(f"cotação: {data_tratado}, horario: {datetime.now()}")
