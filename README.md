@@ -1,8 +1,7 @@
 # Desafio-AT
 
 Este projeto consiste em um sistema web para auxiliar investidores em através do monitoramento de ativos e
-seu tunel de preço. Para isso, o sistema consulta e armazena as cotações dos respectivos ativos periodicamente e envia um email para o usuario  
-quando há possibilidade de negociação
+seu tunel de preço. Para isso, o sistema consulta e armazena as cotações dos respectivos ativos periodicamente e envia um email para o usuario quando há possibilidade de negociação
 
 ### Tecnologias Utilizadas
 
