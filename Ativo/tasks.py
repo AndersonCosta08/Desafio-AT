@@ -27,7 +27,6 @@ def cotacoes(self):
                 Historico.objects.create(
                     ativo=ativo, preco=preco, data_hora=timezone.now()
                 )
-                print(timezone.now())
                 # verifica o pipe de venda
                 if preco >= ativo.valor_de_venda:
                     # envia o email caso o preco aeja igual ou maior ao valor estipulado
@@ -38,6 +37,7 @@ def cotacoes(self):
                         [ativo.usuario.email],
                         fail_silently=False,
                     )
+                    print('email de venda enviado')
                 # verifica o pipe de compra
                 elif preco <= ativo.valor_de_compra:
                     # envia o email caso o preco aeja igual ou menor ao valor estipulado
@@ -48,6 +48,7 @@ def cotacoes(self):
                         [ativo.usuario.email],
                         fail_silently=False,
                     )
+                    print('email de compra enviado')
     return "tarefa concluida"
 
 
@@ -78,6 +79,6 @@ def cotacao(codigo):
     # extrai o valor do preço do ativo no json de responde
     data_tratado = data["data"][0]["quote"]["regularMarketPrice"]
 
-    print(f"cotação: {data_tratado}, horario: {datetime.now()}")
+    print(f"cotação de {codigo}: {data_tratado}, horario: {datetime.now()}")
 
     return data_tratado

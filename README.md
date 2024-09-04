@@ -36,7 +36,7 @@ python manage.py runserver
 
 Para rodar do Celery:
 ```
-celery -A setup worker --loglevel=info
+celery -A setup worker -l info -P gevent
 ```
 
 Para envio programado da task de monitoramento:
